@@ -4,18 +4,18 @@ WORKDIR /source
 
 # copy each project file into working directory to restore dependencies
 # starting out only copy the quickstart_api and quickstart_lib projects
-COPY quickstart_api/*.csproj ./quickstart_api/
+COPY quickstart_cats_api/*.csproj ./quickstart_cats_api/
 COPY quickstart_lib/*.csproj ./quickstart_lib/
 
 # restore packages on the project api project
-RUN dotnet restore quickstart_api/quickstart_api.csproj
+RUN dotnet restore quickstart_cats_api/quickstart_cats_api.csproj
 
 # copy the remaining api and lib project files
-COPY quickstart_api/. ./quickstart_api/
+COPY quickstart_cats_api/. ./quickstart_cats_api/
 COPY quickstart_lib/. ./quickstart_lib/
 
 # set the working directory to /source/project
-WORKDIR  /source/quickstart_api
+WORKDIR  /source/quickstart_cats_api
 
 # build the api and lib projects for release configuration
 RUN dotnet build -c release --no-restore
@@ -28,9 +28,10 @@ RUN dotnet publish -c release --no-build -o /app
 # setting up the staging image for running the app and set the current working directory as app
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
+EXPOSE 80
 
 # copy the published files from the app directory
 COPY --from=publish /app .
 
 # set the entry point command and dll for the app in the image
-ENTRYPOINT ["dotnet", "quickstart_api.dll"]
+ENTRYPOINT ["dotnet", "quickstart_cats_api.dll"]

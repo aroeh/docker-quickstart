@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  quickstart_api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    # ports:
+    #   - "80"
+
+  quickstart_cats_api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    # ports:
+    #   - "80"

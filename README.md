@@ -11,13 +11,14 @@ Welcome to the docker getting started repo.  We're going to be working with dock
 
 ## References
 
-- (Docker Getting Started)[https://docs.docker.com/get-started/]
-- (Dockerize an ASP.Net Core Application)[https://docs.docker.com/samples/dotnetcore/]
-- (Github Docker DotNet)[https://github.com/dotnet/dotnet-docker]
-- (Docker Basic ASP.Net Samples)[https://github.com/dotnet/dotnet-docker/tree/main/samples/aspnetapp]
-- (Tutorial: Containerize a .NET App)[https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows]
-- (Hosting ASP.NET Core Images with Docker over HTTPS)[https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-6.0]
-- (Getting a .NET Core WebAPI project ready for Docker)[https://microsoft.github.io/AzureTipsAndTricks/blog/tip54.html]
+- [Docker Getting Started](https://docs.docker.com/get-started/)
+- [Dockerize an ASP.Net Core Application](https://docs.docker.com/samples/dotnetcore/)
+- [Github Docker DotNet](https://github.com/dotnet/dotnet-docker)
+- [Docker Basic ASP.Net Samples](https://github.com/dotnet/dotnet-docker/tree/main/samples/aspnetapp)
+- [Tutorial: Containerize a .NET App](https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows)
+- [Hosting ASP.NET Core Images with Docker over HTTPS](https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-6.0)
+- [Getting a .NET Core WebAPI project ready for Docker](https://microsoft.github.io/AzureTipsAndTricks/blog/tip54.html)
+- [Containerizing Blazor Apps](https://chrissainty.com/containerising-blazor-applications-with-docker-containerising-a-blazor-server-app/)
 
 # Tools
 - Visual Studio 2022 v17.0.5

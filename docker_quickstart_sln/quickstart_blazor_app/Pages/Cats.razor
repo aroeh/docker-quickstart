@@ -1,0 +1,49 @@
+﻿@page "/cats"
+
+@inject HttpClient Http
+
+
+<PageTitle>Cats</PageTitle>
+
+<h3>Cats</h3>
+
+@if (cats == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Nick Names</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in cats)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        @foreach(var n in item.NickNames)
+                        {
+                            <span>@n</span><br />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Cat[]? cats;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cats = await Http.GetFromJsonAsync<Cat[]>("http://localhost:5001/cats");
+    }
+}

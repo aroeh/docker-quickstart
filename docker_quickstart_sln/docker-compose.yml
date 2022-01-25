@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  quickstart_api:
+    image: ${DOCKER_REGISTRY-}weatherapi
+    build:
+      context: .
+      dockerfile: quickstart_api/Dockerfile
+    ports:
+      - 5002:80
+  
+  quickstart_cats_api:
+    image: ${DOCKER_REGISTRY-}catsapi
+    build:
+      context: .
+      dockerfile: quickstart_cats_api/Dockerfile
+    ports:
+      - 5001:80
+
+  quickstart_blazor_app:
+    image: ${DOCKER_REGISTRY-}webapp
+    build:
+      context: .
+      dockerfile: quickstart_blazor_app/Dockerfile
+    ports:
+      - 5003:80

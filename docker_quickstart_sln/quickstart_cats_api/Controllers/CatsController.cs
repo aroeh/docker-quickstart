@@ -5,6 +5,7 @@ namespace quickstart_cats_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class CatsController : ControllerBase
     {
         private readonly ILogger<CatsController> _logger;

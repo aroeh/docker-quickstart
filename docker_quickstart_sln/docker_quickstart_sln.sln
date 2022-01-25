@@ -5,9 +5,11 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quickstart_api", "quickstart_api\quickstart_api.csproj", "{5D1257EC-C2EA-43E1-B7D8-4A3452DF1A9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quickstart_cats_api", "quickstart_cats_api\quickstart_cats_api.csproj", "{9826A0F4-EA3C-48D9-AB94-317E302DB8C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quickstart_cats_api", "quickstart_cats_api\quickstart_cats_api.csproj", "{9826A0F4-EA3C-48D9-AB94-317E302DB8C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quickstart_lib", "quickstart_lib\quickstart_lib.csproj", "{86BC3DC7-40A0-4B29-99A5-3E2A8C35D712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quickstart_lib", "quickstart_lib\quickstart_lib.csproj", "{86BC3DC7-40A0-4B29-99A5-3E2A8C35D712}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "quickstart_blazor_app", "quickstart_blazor_app\quickstart_blazor_app.csproj", "{96A99646-517C-4D5F-9B6B-CF70783C33C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{86BC3DC7-40A0-4B29-99A5-3E2A8C35D712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BC3DC7-40A0-4B29-99A5-3E2A8C35D712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BC3DC7-40A0-4B29-99A5-3E2A8C35D712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A99646-517C-4D5F-9B6B-CF70783C33C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A99646-517C-4D5F-9B6B-CF70783C33C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A99646-517C-4D5F-9B6B-CF70783C33C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A99646-517C-4D5F-9B6B-CF70783C33C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
