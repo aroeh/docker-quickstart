@@ -1,4 +1,4 @@
-namespace quickstart_api
+namespace quickstart_lib.Models
 {
     public class WeatherForecast
     {

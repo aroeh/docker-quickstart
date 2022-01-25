@@ -20,6 +20,12 @@ Welcome to the docker getting started repo.  We're going to be working with dock
 - (Getting a .NET Core WebAPI project ready for Docker)[https://microsoft.github.io/AzureTipsAndTricks/blog/tip54.html]
 
 # Tools
+- Visual Studio 2022 v
+- Visual Studio Code v
+- Docker
+    - Desktop v4.4.4
+    - Engine v20.10.12
+    - Compose v1.29.2
 
 # Getting Started
 

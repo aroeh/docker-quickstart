@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using quickstart_lib.Models;
 
 namespace quickstart_api.Controllers
 {
@@ -21,6 +22,7 @@ namespace quickstart_api.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogInformation("Retrieving weather information");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
