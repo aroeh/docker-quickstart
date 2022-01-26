@@ -28,7 +28,6 @@ RUN dotnet publish -c release --no-build -o /app
 # setting up the staging image for running the app and set the current working directory as app
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-EXPOSE 80
 
 # copy the published files from the app directory
 COPY --from=publish /app .
