@@ -11,6 +11,7 @@ COPY quickstart_lib/*.csproj ./quickstart_lib/
 RUN dotnet restore quickstart_blazor_app/quickstart_blazor_app.csproj
 
 # copy the remaining api and lib project files
+# can also do a shorthand command ex: COPY . .
 COPY quickstart_blazor_app/. ./quickstart_blazor_app/
 COPY quickstart_lib/. ./quickstart_lib/
 
@@ -23,15 +24,12 @@ RUN dotnet build -c release --no-restore
 # Get the files from the build and publish them for release
 # output the published files into the /app directory
 FROM build AS publish
-RUN dotnet publish -c release --no-build -o /app
+RUN dotnet publish -c release -o /app
 
 # setting up the staging image for running the app and set the current working directory as app
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
-WORKDIR /app
-EXPOSE 80
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
 
 # copy the published files from the app directory
-COPY --from=publish /app .
-
-# set the entry point command and dll for the app in the image
-ENTRYPOINT ["dotnet", "quickstart_blazor_app.dll"]
+COPY --from=publish /app/wwwroot .
+COPY quickstart_blazor_app/nginx.conf /etc/nginx/nginx.conf
