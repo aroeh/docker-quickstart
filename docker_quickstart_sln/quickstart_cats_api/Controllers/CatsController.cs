@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using quickstart_lib.Models;
+using StackExchange.Redis;
 
 namespace quickstart_cats_api.Controllers
 {
@@ -9,11 +11,16 @@ namespace quickstart_cats_api.Controllers
     public class CatsController : ControllerBase
     {
         private readonly ILogger<CatsController> _logger;
-        private readonly IEnumerable<Cat> cats;
+        private List<Cat> cats;
+        private readonly IConnectionMultiplexer cache;
+        private readonly IDatabase cacheDb;
 
-        public CatsController(ILogger<CatsController> logger)
+        public CatsController(ILogger<CatsController> logger, IConnectionMultiplexer cacheConnection)
         {
             _logger = logger;
+            cache = cacheConnection;
+            cacheDb = cache.GetDatabase();
+
             cats = new List<Cat>
             {
                 new Cat
@@ -48,6 +55,50 @@ namespace quickstart_cats_api.Controllers
         {
             _logger.LogInformation("Retrieving Cats");
             return Ok(cats);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            _logger.LogInformation("checking cache for value");
+            var cacheString = cacheDb.StringGet($"cat:{id}");
+            if (!string.IsNullOrWhiteSpace(cacheString))
+            {
+                _logger.LogInformation("data found in cache.  returning cached value");
+                var cacheVal = JsonConvert.DeserializeObject<Cat>(cacheString);
+                return Ok(cacheVal);
+            }
+
+            _logger.LogInformation("data not found in cache");
+            _logger.LogInformation("retrieving data from repository");
+
+            var cat = cats.First(c => c.Id == id);
+
+            _logger.LogInformation("data found...adding to cache");
+            cacheDb.StringSet($"cat:{cat.Id}", JsonConvert.SerializeObject(cat));
+
+            return Ok(cat);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Cat cat)
+        {
+            //add cat to the existing data
+            cat.Id = cats.Count + 1;
+            cats.Add(cat);
+
+            _logger.LogInformation("checking cache for value");
+            if (cacheDb.KeyExists($"cat:{cat.Id}"))
+            {
+                _logger.LogInformation("value exists in cache");
+                _logger.LogInformation("deleting value from cache");
+                cacheDb.StringGetDelete($"cat:{cat.Id}");
+            }
+
+            _logger.LogInformation("adding updated value to cache");
+            cacheDb.StringSet($"cat:{cat.Id}", JsonConvert.SerializeObject(cat));
+
+            return Ok("new cat added");
         }
     }
 }

@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+  cache:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    # command: redis-server --save 20 1 --loglevel warning --requirepass <password> # authentication command
+    # volumes: # volume binding for persistent cache
+    #   - cache:/data
+
   quickstart_api:
     image: ${DOCKER_REGISTRY-}weatherapi
     build:
@@ -19,6 +28,16 @@ services:
       dockerfile: quickstart_cats_api/Dockerfile
     ports:
       - 5001:80
+    depends_on:
+      - cache
+    links:
+      - cache
+    environment:
+      REDIS_HOST: cache
+      REDIS_PORT: 6379
+      # REDIS_PASSWORD: <password>
+    # volumes:
+    #   - <mount-path>
 
   quickstart_blazor_app:
     image: ${DOCKER_REGISTRY-}webapp
