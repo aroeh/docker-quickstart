@@ -58,12 +58,10 @@ cd <PATH>\docker-quickstart\docker_quickstart_sln
 docker-compose up
 ```
 
----
-NOTE: To run in detached mode use the following command
+> NOTE: To run in detached mode use the following command
 ```
 docker-compose up -d
 ```
----
 
 4. View the apps running in Docker
 
