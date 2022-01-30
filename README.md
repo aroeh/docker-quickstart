@@ -24,6 +24,7 @@ Welcome to the docker getting started repo.  We're going to be working with dock
 - [Redis DotNet References](https://docs.redis.com/latest/rs/references/client_references/client_csharp/)
 
 # Tools
+
 - Windows 10 Pro **Pro or higher is needed since that enables the hyper-v virtualization on windows hosts
 - Visual Studio 2022 v17.0.5
 - Visual Studio Code v1.63.2
@@ -33,8 +34,47 @@ Welcome to the docker getting started repo.  We're going to be working with dock
     - Compose v1.29.2
 - .Net6
 
-# Getting Started
+# Solution Overview
 
-# Build
+There are 4 projects in the solution
+- quickstart_blazor_app - basic UI application which pulls data from the apis
+- quickstart_api - default .net api template that returns randomized weather data
+- quickstart_cats_api - basic api using cats as the data
+- quickstart_lib - share class library used by the other projects
 
-# Run
+Each api project can be run independently, however the quickstart_blazor_app has dependencies on the apis.
+
+# Build and Run
+
+Each project can be built independently but docker and docker compose are the intended ways build all of the projects.  Use a Command line tool that can run docker commands
+
+1. Make sure Docker is running
+2. Change to the solution directory containing the .sln file
+```
+cd <PATH>\docker-quickstart\docker_quickstart_sln
+```
+3. Run docker compose up
+```
+docker-compose up
+
+Detached mode
+docker-compose up -d
+```
+4. View the apps running in Docker
+
+If making any changes to a project, the container and image will need to rebuilt.  I found it easiest to remove all images using docker compose down
+```
+docker-compose down --rmi 'all'
+```
+
+# Docker Commands
+
+Review the docker command line reference at [Docker Docs](https://docs.docker.com/reference/)
+
+These are the most common commands I found myself using in this project
+| Command | Example | Reference Documentation | Notes |
+|---------|---------|-------------------------|-------|
+| docker-compose up [options] | docker-compose up -d | [Docker Compose Up](https://docs.docker.com/compose/reference/up/) | adding the -d will run in detached mode and is great for faster startup.  This is also preferred if not needing to debug |
+| docker-compose down [options] | docker-compose down --rmi 'all'| [Docker Compose Down](https://docs.docker.com/compose/reference/down/) | When needing to make changes to a project you will have to rebuild the image and container.  This command made it easy to tear everything down very quickly to a clean state.  There might be a better way to do this though, but this was easy to use |
+| docker logs -f <container-name> | docker logs -f docker_quickstart_sln-cache-1 | [Docker Logs](https://docs.docker.com/engine/reference/commandline/logs/) | If the container is nested under a solution, then use the nester container name and not the name of the image as set in the compose file |
+| docker run [options] <image-name> |docker run redis| [Docker Logs](https://docs.docker.com/engine/reference/commandline/logs/) | This was handy for pulling down a single image to do some basic setup and testing before incorporating into the project and compose |
