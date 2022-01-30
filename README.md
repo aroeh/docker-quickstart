@@ -56,10 +56,15 @@ cd <PATH>\docker-quickstart\docker_quickstart_sln
 3. Run docker compose up
 ```
 docker-compose up
+```
 
-Detached mode
+---
+NOTE: To run in detached mode use the following command
+```
 docker-compose up -d
 ```
+---
+
 4. View the apps running in Docker
 
 If making any changes to a project, the container and image will need to rebuilt.  I found it easiest to remove all images using docker compose down
