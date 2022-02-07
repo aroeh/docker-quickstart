@@ -44,6 +44,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        cats = await Http.GetFromJsonAsync<Cat[]>("http://localhost:5001/cats");
+        cats = await Http.GetFromJsonAsync<Cat[]>("https://localhost:5002/cats");
     }
 }
