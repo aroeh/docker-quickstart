@@ -55,12 +55,9 @@ services:
       context: .
       dockerfile: quickstart_blazor_app/Dockerfile
     ports:
-      - 4000:80
-      # - 4002:443
-    # environment:
-    #   - ASPNETCORE_URLS=https://+:443;http://+:80
-    #   - ASPNETCORE_HTTPS_PORT=4002
-    #   - ASPNETCORE_Kestrel__Certificates__Default__Password=certpassword
-    #   - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dockerquickstart.pfx
-    # volumes:
-    #   - ~/.aspnet/https:/https:ro
+      - 4001:80
+      - 4002:443
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    volumes:
+      - ~/.aspnet/https:/https:ro

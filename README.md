@@ -22,6 +22,8 @@ Welcome to the docker getting started repo.  We're going to be working with dock
 - [Redis cache in a dotnet core docker container](https://dotnetcorecentral.com/blog/redis-cache-in-net-core-docker-container/)
 - [Redis cache with Docker Compose](https://geshan.com.np/blog/2022/01/redis-docker/)
 - [Redis DotNet References](https://docs.redis.com/latest/rs/references/client_references/client_csharp/)
+- [nginx](https://nginx.org/)
+- [Hosting ASP.NET Core with nginx](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-6.0)
 
 # Tools
 
@@ -64,6 +66,9 @@ docker-compose up -d
 ```
 
 4. View the apps running in Docker
+
+> NOTE: The redirect for the blazor app here isn't perfect and doesn't work yet on http://localhost:4002
+> The redirect does work for http://localhost:4001
 
 If making any changes to a project, the container and image will need to rebuilt.  I found it easiest to remove all images using docker compose down
 ```
