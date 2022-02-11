@@ -112,7 +112,7 @@ COPY quickstart_api/*.csproj ./quickstart_api/
 ```
 
 | Step | Line | What does it do? |
-|------|------|------------------|
+|:------:|------|------------------|
 | 1 | FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build | Pulls the dotnet image and sets that with an alias named "build" |
 | 2 | WORKDIR /source | Within the build image this creates a directory named "source" and sets that as the current directory for the image commands |
 | 3 | COPY quickstart_api/*.csproj ./quickstart_api/ | Copies all csproj files from the build context location to the image directory.  In this instance it is copying docker_quickstart_sln/quickstart_api/quickstart_api.csproj to build/source/quickstart_api |
