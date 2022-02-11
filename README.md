@@ -75,6 +75,45 @@ If making any changes to a project, the container and image will need to rebuilt
 docker-compose down --rmi 'all'
 ```
 
+## Docker Context
+
+Context is a feature of the docker builds and docker compose that needs to be understood.  I wanted to call it out here because much documentation assumes that new users are aware of it, which might be the case.  The context is also the key in understanding the composition of the Dockerfile and docker-compose.yml
+
+So what is context within docker and docker compose?  Context refers to the scope of the build directories in the docker deamon. In other words, context is the base directory docker will use when building and producing images.  Each Dockerfile and docker-compose.yml needs to have a plan for context since that determines configuration for key functions like COPY.
+
+> The Context for this repository is set at the solution directory: docker_quickstart_sln
+> All project Dockerfile are configured with this in mind
+
+Let's take a look at the docker-compose.yml for quickstart_api.  We'll also look at that Dockerfile as well.
+
+This is the entry within the docker-compose.yml for quickstart_api.
+```
+quickstart_api:
+    image: ${DOCKER_REGISTRY-}weatherapi
+    build:
+      context: .
+      dockerfile: quickstart_api/Dockerfile
+```
+
+Note the context and dockerfile.  context is set to "." meaning that the directory containing the docker-compose.yml is the context.  In other words the directory docker_quickstart_sln is the build context.  This also acts as the base for the location of the dockerfile.  Since the solution folder is the context, we point to the directory and specific docker file to use.  So the location fo the docker file entry ultimately runs as docker_quickstart_sln/quickstart_api/Dockerfile
+
+So let's break down the dockerfile bit more to further understand context.  We'll use this first block as the example
+```
+# setting up the build image
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /source
+
+# copy each project file into working directory to restore dependencies
+# starting out only copy the quickstart_api and quickstart_lib projects
+COPY quickstart_api/*.csproj ./quickstart_api/
+```
+
+| Step | Line | What does it do? |
+|------|------|------------------|
+| 1 | FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build | Pulls the dotnet image and sets that with an alias named "build" |
+| 2 | WORKDIR /source | Within the build image this creates a directory named "source" and sets that as the current directory for the image commands |
+| 3 | COPY quickstart_api/*.csproj ./quickstart_api/ | Copies all csproj files from the build context location to the image directory.  In this instance it is copying docker_quickstart_sln/quickstart_api/quickstart_api.csproj to build/source/quickstart_api |
+
 # Docker Commands
 
 Review the docker command line reference at [Docker Docs](https://docs.docker.com/reference/)
