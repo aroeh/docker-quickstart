@@ -17,7 +17,12 @@ builder.Services.AddSwaggerGen();
  * Through docker compose set the connection string to the named service instance in the docker compose file
  * ex: cache:6379
  */
-var redis = ConnectionMultiplexer.Connect($"{Environment.GetEnvironmentVariable("REDIS_HOST")}:{Environment.GetEnvironmentVariable("REDIS_PORT")}");
+var redisConfig = new ConfigurationOptions
+{
+    Password = Environment.GetEnvironmentVariable("REDIS_PASSWORD")
+};
+redisConfig.EndPoints.Add($"{Environment.GetEnvironmentVariable("REDIS_HOST")}:{Environment.GetEnvironmentVariable("REDIS_PORT")}");
+var redis = ConnectionMultiplexer.Connect(redisConfig);
 builder.Services.AddSingleton<IConnectionMultiplexer>(redis);
 
 var app = builder.Build();
